@@ -1,0 +1,73 @@
+orm query for django is written ina shell
+
+
+python manage.py shell
+get=only one value\specific value
+update method not works with get
+
+
+=============query for creating a resource============
+
+Movie.objects.create(name="ozler",language="malayalam",genre="action",run_time=120,director="midhun",actors="jayaram",year=2024)
+Movie.objects.create(name="kaathal",language="malayalam",genre="drama",run_time=115,director="jo baby",actors="mammootty,jyothika",year=2023)
+Movie.objects.create(name="jai bhim",language="tamil",genre="thriller",run_time=120,director="gnavel",actors="surya",year=2022) 
+Movie.objects.create(name="five feet apart",language="english",genre="romance",run_time=110,director="richardson",actors="haley",year=2019) 
+
+
+======query for fetching all records=======
+
+qs=Movie.objects.all()
+
+
+======query for fetching a specific movie====
+
+qs=Movie.objects.get(id=2)
+
+=====query for filtering======
+
+qs=Movie.objects.filter(language="malayalam")
+
+====query for updating movie object======
+
+Movie.objects.filter(id=3).update(director="ram",year=2020)
+
+
+
+=======query for deleting a movie object=======
+
+Movie.objects.filter(id=7).delete()
+
+======field lookup=========
+
+
+Movie.objects.filter(year<2024)
+<  :  __lt
+<=  :  __lte
+>  :  __gt
+>=  :  __gte
+
+qs= Movie.objects.filter(year__lt=2024)
+
+======movies in year 2024
+qs= Movie.objects.filter(year__gte=2024)
+
+
+
+=====fetching movies not equal to english
+
+qs=Movie.objects.exclude(language="english")
+
+
+======fetching the movies with runtime between 100 and 120
+
+qs=Movie.objects.filter(run_time=120)
+
+
+qs=Movie.objects.filter(run_time__gt=100,run_time__lt=120)
+
+======orm query for listing all genres
+
+qs=Movie.objects.all().values_list("genre",flat=True).distinct()
+
+
+
